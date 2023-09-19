@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Livewire;
 
-
 use App\Livewire\Tasks\CreateTasks;
 use App\Models\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -14,15 +13,15 @@ class CreateTasksTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    /** @test */
     public function it_creates_a_task_and_redirects_to_search_tasks()
     {
         Livewire::test(CreateTasks::class)
-            ->set('description', 'Nova Tarefa')
+            ->set('description', 'Tarefa')
+            ->set('complete', false)
             ->call('saveTask')
-            ->assertRedirect(route('tasks.index'));
+            ->assertRedirect(['tasks.index']);
 
-        $this->assertTrue(Task::where('description', 'Nova Tarefa')->exists());
+        $this->assertTrue(Task::where('description', '=' ,'Tarefa')->exists());
     }
 
     /** @test */
