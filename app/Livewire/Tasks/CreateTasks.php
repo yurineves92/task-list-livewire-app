@@ -14,7 +14,7 @@ class CreateTasks extends Component
         $this->validate();
 
         $this->form->store();
-        return redirect()->to('/tasks');
+        return $this->redirect('/tasks');
     }
     public function render()
     {

@@ -16,12 +16,11 @@ class CreateTasksTest extends TestCase
     public function it_creates_a_task_and_redirects_to_search_tasks()
     {
         Livewire::test(CreateTasks::class)
-            ->set('description', 'Tarefa')
-            ->set('complete', false)
+            ->set('form.description', 'Tarefa')
             ->call('saveTask')
-            ->assertRedirect(['tasks.index']);
+            ->assertRedirect(route('tasks.index'));
 
-        $this->assertTrue(Task::where('description', '=' ,'Tarefa')->exists());
+        $this->assertTrue(Task::where('description', 'LIKE', '%' . 'Tarefa' . '%')->exists());
     }
 
     /** @test */

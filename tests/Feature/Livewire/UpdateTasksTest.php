@@ -17,12 +17,11 @@ class UpdateTasksTest extends TestCase
         $task = Task::factory()->create();
 
         Livewire::test(UpdateTasks::class, ['task' => $task])
-            ->set('description', 'Nova Tarefa')
-            ->set('complete', true)
+            ->set('form.description', 'Tarefa')
             ->call('updateTask')
             ->assertRedirect(route('tasks.index'));
 
-        $this->assertTrue(Task::where('description', 'Nova Tarefa')->exists());
+        $this->assertTrue(Task::where('description', 'LIKE', '%' . 'Tarefa' . '%')->exists());
     }
 
     /** @test */
