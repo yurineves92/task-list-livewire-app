@@ -51,13 +51,16 @@ class SearchTasks extends Component
         return date('d/m/Y H:i:s', strtotime($date));
     }
 
-    public function completeTask($id)
+    public function completeTask($id): void
     {
         $task = Task::find($id);
-        $task->update([
-            'complete' => true,
-            'completed_at' => now(),
-        ]);
+
+        if ($task) {
+            $task->update([
+                'complete' => true,
+                'completed_at' => now(),
+            ]);
+        }
     }
 
     public function deleteTask($id)
